@@ -1,0 +1,12 @@
+PS C:\WINDOWS\System32> cd D:\YandexDisk\work\django_nick_walter
+
+PS D:\YandexDisk\work\django_nick_walter> .venv\Scripts\Activate.ps1
+
+(.venv) PS D:\YandexDisk\work\django_nick_walter> cd D:\YandexDisk\work\django_nick_walter\ django-admin startproject portfolio
+(.venv) PS D:\YandexDisk\work\django_nick_walter> cd D:\YandexDisk\work\django_nick_walter\ django-admin startproject personal_portfolio
+
+меняем папку вручную на personal_portfolio-project
+(.venv) PS D:\YandexDisk\work\django_nick_walter> cd D:\YandexDisk\work\django_nick_walter\personal_portfolio-project
+
+
+(.venv) PS D:\YandexDisk\work\django_nick_walter\personal_portfolio-project> python manage.py runserver

@@ -1,0 +1,30 @@
+<!-- тег подсоединяющий к главному шаблону -->
+{% extends 'portfolio/base.html' %}
+
+<!-- тег вывода данного шоблона в базовом -->
+{% block content %}
+
+
+
+  {% load static %}
+
+  <br><a href="{% url 'url_home' %}"><p>На главную страницу</p></a>
+  <a href="{% static 'portfolio/Пивченко_дисс 13.pdf' %}">Resume</a>
+  <h1>Блог Дмитрия</h1>
+  <br><img src="{% static 'portfolio/205958.jpg' %}" height=450 width=750><br>
+  <br>Блогов было написано Дмитрием: {{ key_blog_count }}. Дальше больше!<br>
+
+  {% for key_blog in key_blogs  %}
+  <!-- в скобках для выполнения логики тегов задаем тег поиска по имени маршрута name='url_detail'который задaли в urls.py,
+  запускается fx_detail и отобрашается шаблон detail.html с ключем переданным с запроса страницы для поиска id  в базе-->
+    <a href="{% url 'blog:url_detail' key_blog.id %}">
+      <h2>{{ key_blog.title }}</h2>
+    </a>
+    <p>{{ key_blog.date|date:'M d Y' }}</p>
+    <p>{{ key_blog.description|truncatechars:20 }}</p>
+
+  {% endfor %}
+
+
+
+{% endblock %}

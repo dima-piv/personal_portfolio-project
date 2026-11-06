@@ -1,0 +1,72 @@
+после запуска проекта и создания приложений
+
+1) в фaйле setting.py добавляем строки с созданными приложениями
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'blog',
+    'portfolio',
+]
+
+2) в приложении Portfolio в файле models.py создаем класс Project
+
+3) для работы с изображениями нужно установить библиотеку Pillow
+для этого осановить сервер и 
+pip install pillow
+
+4) проведем миграции изменений
+python manage.py migrate
+python manage.py makemigrations
+
+
+Урок 4.4. Админка и изображения
+
+5) создаем пользователя админа
+python manage.py createsuperuser
+dima
+1234
+
+6) команда для изменения пароля
+python manage.py changepassword dima
+dima1234
+
+6) зайдем через админа в браузере введя пароль и логин созданные выше
+http://127.0.0.1:8000/admin
+
+7) в приложение Portfolio добавим в таблицу/класс Projects данные (первый объект)
+
+8) перенесем новосозданную папку с сохраненным в таблицу Projects изображением в другое место
+для этого удалим созданную в Portfolio папку с изображением
+и в фале настроек Settings.py где то после STATIC_URL =
+внесем
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+и импортируем наверху
+import os
+
+9) MEDIA_URL задает адрес по которому будут прикрепляться изображения к тем или иным проектам
+
+10) добавляем в URL адре пути откуда брать файлы
+аргументы в static('префикс в пути к файлу', 'основная часть пути')
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+
+
+
+
+
+
+
+
+
+
+
+

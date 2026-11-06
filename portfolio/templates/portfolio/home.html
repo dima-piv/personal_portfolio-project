@@ -1,0 +1,18 @@
+<!-- тег подсоединяющий к главному шаблону -->
+{% extends 'portfolio/base.html' %}
+
+<!-- тег вывода данного шоблона в базовом -->
+{% block content %}
+
+  <h1>Портфолио Дмитрия</h1>
+  <br><a href="{% url 'blog:url__all_blogs' %}"><p>перейти к блогам</p></a>
+  {% for project in key_projects %}
+    <h2>{{ project.title }}</h2>
+    <p>{{ project.description }}</p>
+    <img src="{{ project.image.url }}" height=800 width=650>
+    {% if project.url %}
+      <br><a href="{{project.url}}"">Link</a>
+    {% endif %}
+  {% endfor %}
+
+{% endblock %}

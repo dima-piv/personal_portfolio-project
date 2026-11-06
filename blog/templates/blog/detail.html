@@ -1,0 +1,15 @@
+<!-- тег подсоединяющий к главному шаблону -->
+{% extends 'portfolio/base.html' %}
+
+<!-- тег вывода данного шоблона в базовом -->
+{% block content %}
+
+
+  <h1>{{ key_blog.title }}</h1>
+  <h2>--{{ key_blog.date|date:'F jS Y' }}--</h2>
+  <!-- этот тег дает возможность размещаь html теги внутри текста
+  для форматирования (жирность идр.) |safe -->
+  {{ key_blog.description|safe }}
+
+
+{% endblock %}
