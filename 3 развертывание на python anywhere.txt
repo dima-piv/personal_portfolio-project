@@ -1,0 +1,151 @@
+местонахождение
+pwd
+
+если проект открытый, то перенесем его с GitHub
+git clone https://github.com/dima-piv/personal_portfolio-project.git
+
+посмотрим что находится внутри папки в которой находимся
+ls
+
+перейдем в папку проекта
+cd personal_portfolio-project
+
+сделаем виртуальное окружение
+где первый аргумент команда, второй версия пайтон, третий название окружения
+mkvirtualenv --python=/usr/bin/python3.13 portfoliovenv
+
+выход
+exit
+
+
+войти обратно в виртуальное окружение
+workon portfoliovenv
+
+выйти из окружения
+deactivate
+
+что бы посмотреть список окружений
+cd .virtualenvs/
+и команда просмотра содержимого
+ls
+
+установим Django и pillow в окружение
+pip install django pillow
+
+перейти в корневую папку
+cd ..
+ls
+
+переходим в папку проекта
+cd personal_portfolio-project
+
+
+полный путь к проекту командой
+pwd
+путь к проекту
+/home/dvpiv/personal_portfolio-project
+имя проекта
+personal_portfolio-project
+виртуальное окружение
+portfoliovenv
+
+
+в разделе Virtualenv: нужно указать название виртуального окружения
+будет выдан путь
+/home/dvpiv/.virtualenvs/portfoliovenv
+
+в разделе Code:
+Enter the path to your web app source code
+нужно указать путь к папке с проектом
+/home/dvpiv/personal_portfolio-project
+
+то же для Working directory:
+/home/dvpiv/personal_portfolio-project
+
+теперь нужно отредактировать wsgi файл оставив там только проект Django
+
+вставим путь к проекту в параметр функции path
+path = '/home/dvpiv/personal_portfolio-project'
+
+эту строку переименовываем на имя папки где находятся файлы с настройкми
+os.environ['DJANGO_SETTINGS_MODULE'] = 'mysite.settings'
+переделываем в 
+os.environ['DJANGO_SETTINGS_MODULE'] = 'personal_portfolio.settings'
+
+в файле setting.py создаем строку для формирования общей папки со статическими файлами (после медиа рут)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+в терминале командой создаем общую папку для статики
+переходим в директорию где manage.py
+python manage.py collectstatic
+
+этот адрес где они теперь будут храниться
+133 static files copied to '/home/dvpiv/personal_portfolio-project/static'.
+
+
+в вэб интерфейсе проекта нужно задать пути к статическим файлам
+в разделе Static files:
+URL
+/static/
+Directory
+/home/dvpiv/personal_portfolio-project/static
+
+то же для медиа создать еще один путь 
+/media/
+/home/dvpiv/personal_portfolio-project/media
+
+
+Далее переносим обновленную информацию о проекте на GitHub
+и с него на локальный компьютер с проектом для редактирования
+
+удобный сайт для создания файла gitignore для django
+https://www.toptal.com/developers/gitignore/
+
+создадим файл gitignore в редакторе nano
+выйти из редактора CTRL+X
+nano .gitignore
+
+вставляем данные с сайта и сохраняем его в файле проекта
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+/static/
+.pytest_cache/
+logs/
+
+
+
+далее нужно исключить из добавления на гитхаб при комите
+то что перечислено в файле гитигнор при этом оставив эти файлы в
+текущем расположении на сервере (точка значит все из текущей папки)
+git rm -r --cached .
+
+далее добавляем файлы из текущей папки кроме тех что исключили для комита
+в список для выполнения комита (точка значит все из текущей папки)
+git add .
+git status
+
+далее обновляем инфорамцию на гитхаб с сервера пайтонэнивэр
+исключив все что не нужно для комита
+git commit -m "First Refresh My Site from PythonAnyWhere"
+
+теперь загружаем созданный комит на гитхаб, который сам должен определить в какую ветку
+или попросить дать пояснение
+git push origin
+
+далее терминал запрашивает пользователя и пароль
+пароль нужно сделать создав токен на гитхабе и выдать ему права на ччтение из запись
+Как создать токен
+1.
+На GitHub открой Settings → Developer settings → Personal access tokens.
+2.
+Выбери Fine-grained tokens или Tokens (classic) и создай токен.
+3.
+Дай ему доступ к репозиторию personal_portfolio-project и разрешение на запись содержимого (Contents: Read and write). Для classic-токена обычно нужен scope repo.
+4.
+Скопируй токен — GitHub показывает его только при создании. Не отправляй его никому и не вставляй в публичные файлы.
+
+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
+

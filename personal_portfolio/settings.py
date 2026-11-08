@@ -131,3 +131,8 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+try:
+    from .local_settings import *
+except ImportError:
+    print('Look like no local file. You must be on production.')
