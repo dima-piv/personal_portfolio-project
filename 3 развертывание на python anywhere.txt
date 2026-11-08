@@ -147,5 +147,5 @@ git push origin
 4.
 Скопируй токен — GitHub показывает его только при создании. Не отправляй его никому и не вставляй в публичные файлы.
 
-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
+ВАШ_GITHUB_TOKEN
 

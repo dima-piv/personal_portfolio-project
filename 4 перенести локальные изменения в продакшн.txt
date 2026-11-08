@@ -4,4 +4,18 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+в основном settings.py внизу пишем
+try:
+    from .local_settings import *
+except ImportError:
+    print('Look like no local file. You must be on production.')
+
+
+извлекаем зависимости что бы они всегда были в проекте
+pip3 freeze > requirements.txt
+
+добавляем в коммит
+git add .
+git commit -m "For local settings"
+
 
